@@ -62,15 +62,6 @@ export const createMultipleParticipants = async (
       return;
     }
 
-    // const existingParticipants = await ParticipantModel.find({
-    //   userId: new Types.ObjectId(req.userId),
-    //   name: { $in: participants.map((p) => p.name) },
-    // });
-    // if (existingParticipants.length > 0) {
-    //   res.status(400).json({ error: "Some participants already exist" });
-    //   return;
-    // }
-
     const createdParticipants = await ParticipantModel.create(
       participants.map((p) => ({
         userId: new Types.ObjectId(req.userId),
