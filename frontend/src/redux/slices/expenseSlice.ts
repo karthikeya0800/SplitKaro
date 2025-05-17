@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { IExpense } from "../../types";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
-import { toggleShowLogin } from "@/redux/slices/authSlice";
 
 interface ExpenseState {
   expenses: IExpense[];

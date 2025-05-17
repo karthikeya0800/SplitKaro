@@ -1,4 +1,3 @@
-import React from "react";
 import { CurrencyType } from "@/redux/store";
 import {
   DollarSign,

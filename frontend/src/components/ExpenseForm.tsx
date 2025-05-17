@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/components/ui/sonner";
-import { CurrencyIcon, getCurrencySymbol } from "@/utils/currency";
+import { getCurrencySymbol } from "@/utils/currency";
 import { Plus, Pencil, Trash2, X, Loader2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useDispatch, useSelector } from "react-redux";

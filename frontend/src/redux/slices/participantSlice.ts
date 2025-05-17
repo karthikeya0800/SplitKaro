@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { IExpense, IPaidFor, IParticipant } from "../../types";
-import { AppDispatch } from "../store";
-import { toggleShowLogin } from "@/redux/slices/authSlice";
 
 interface ParticipantState {
   participants: IParticipant[];
@@ -166,25 +164,6 @@ export const deleteParticipant = createAsyncThunk<
           }
         );
       }
-      // const participants = await axios.get(`${BASE_URL}/api/participants`, {
-      //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      // });
-      // for (const participant of participants.data) {
-      //   if (participant.paidFor.includes(id)) {
-      //     participant.paidFor = participant.paidFor.filter(
-      //       (paidForId) => paidForId !== id
-      //     );
-      //     await axios.put(
-      //       `${BASE_URL}/api/participants/${participant._id}`,
-      //       participant,
-      //       {
-      //         headers: {
-      //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-      //         },
-      //       }
-      //     );
-      //   }
-      // }
     }
     return id;
   } catch (error: any) {

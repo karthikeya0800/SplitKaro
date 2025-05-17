@@ -1,14 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Eye, EyeOff, Loader2 } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState, CurrencyType } from "@/redux/store";
 import { login } from "@/redux/slices/authSlice";
@@ -91,7 +84,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onToggleForm }) => {
           className="w-full bg-expense hover:bg-expense-dark"
           disabled={userLoading}
         >
-          {userLoading ? <Loader2 className="animate-spin"/> : "Login"}
+          {userLoading ? <Loader2 className="animate-spin" /> : "Login"}
         </Button>
 
         <div className="text-center mt-4">

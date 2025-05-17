@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AppDispatch, RootState, CurrencyType } from "@/redux/store";
 import { useTheme } from "@/context/ThemeContext";

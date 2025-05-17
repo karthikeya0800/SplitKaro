@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, ChevronUp, Info } from "lucide-react";
+import { ArrowRight, Info } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -253,22 +253,24 @@ export const ExpenseSummary: React.FC = () => {
                           detailedMatrix[person.name][otherPerson.name];
                         const isOwed =
                           detailedMatrix[otherPerson.name][person.name];
-                          if (
-                            (!owes || owes.amount === 0) &&
-                            (!isOwed || isOwed.amount === 0)
-                          ) {
-                            return (
-                              <div
-                                key={otherPerson.name}
-                                className="flex justify-between p-2 bg-secondary/50 rounded-lg overflow-scroll"
-                              >
-                                <span className="mr-2 overflow-scroll">{otherPerson.name}</span>
-                                <span className="text-muted-foreground text-nowrap">
-                                  No transactions
-                                </span>
-                              </div>
-                            );
-                          }
+                        if (
+                          (!owes || owes.amount === 0) &&
+                          (!isOwed || isOwed.amount === 0)
+                        ) {
+                          return (
+                            <div
+                              key={otherPerson.name}
+                              className="flex justify-between p-2 bg-secondary/50 rounded-lg overflow-scroll"
+                            >
+                              <span className="mr-2 overflow-scroll">
+                                {otherPerson.name}
+                              </span>
+                              <span className="text-muted-foreground text-nowrap">
+                                No transactions
+                              </span>
+                            </div>
+                          );
+                        }
                         if (otherPerson.name === person.name) {
                           return (
                             <div
@@ -355,22 +357,6 @@ export const ExpenseSummary: React.FC = () => {
                             </div>
                           );
                         }
-                        // if (
-                        //   (!owes || owes.amount === 0) &&
-                        //   (!isOwed || isOwed.amount === 0)
-                        // ) {
-                        //   return (
-                        //     <div
-                        //       key={otherPerson.name}
-                        //       className="flex justify-between p-2 bg-secondary/50 rounded-lg overflow-scroll"
-                        //     >
-                        //       <span className="mr-2 overflow-scroll">{otherPerson.name}</span>
-                        //       <span className="text-muted-foreground text-nowrap">
-                        //         No transactions
-                        //       </span>
-                        //     </div>
-                        //   );
-                        // }
 
                         return (
                           <div
