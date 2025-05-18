@@ -23,6 +23,10 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("Server is Active!");
+});
+
 // Mount routes
 app.use("/api/auth", authRoutes);
 app.use("/api/participants", participantRoutes);
