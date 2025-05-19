@@ -87,6 +87,15 @@ export const updateParticipant = async (
       return;
     }
 
+    const existingParticipant = await ParticipantModel.findOne({
+      userId: new Types.ObjectId(req.userId),
+      name: name,
+    });
+    if (existingParticipant) {
+      res.status(400).json({ error: "Participant already exists" });
+      return;
+    }
+
     const participant = await ParticipantModel.findOneAndUpdate(
       { _id: new Types.ObjectId(id), userId: new Types.ObjectId(req.userId) },
       { name, email, updatedAt: new Date() },

@@ -102,6 +102,34 @@ export const updateParticipant = createAsyncThunk<
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
+      if (response.status === 200) {
+        const expenses = await axios.get(`${BASE_URL}/api/expenses`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        const expensesToUpdate = expenses.data.filter(
+          (expense: IExpense) =>
+            expense.paidBy.participantId === id ||
+            expense.paidFor.some((item) => item.participantId === id)
+        );
+        for (const expense of expensesToUpdate) {
+          const updatedExpense = { ...expense };
+          if (updatedExpense.paidBy.participantId === id) {
+            updatedExpense.paidBy.name = data.name;
+          }
+          updatedExpense.paidFor = updatedExpense.paidFor.map((item) =>
+            item.participantId === id ? { ...item, name: data.name } : item
+          );
+          await axios.put(
+            `${BASE_URL}/api/expenses/${expense._id}`,
+            updatedExpense,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+        }
+      }
       return response.data;
     } catch (error: any) {
       if (error.response?.status === 401) {
@@ -153,6 +181,9 @@ export const deleteParticipant = createAsyncThunk<
           paidFor: expense.paidFor.filter(
             (item: IPaidFor) => item.participantId !== id
           ),
+          amount:
+            expense.amount -
+            expense.paidFor.find((item) => item.participantId === id).amount,
         };
         const response = await axios.put(
           `${BASE_URL}/api/expenses/${expense._id}`,

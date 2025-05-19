@@ -104,14 +104,18 @@ export const Header: React.FC = () => {
       const response = await dispatch(
         updateParticipant({ id: editingParticipant.id, name: newParticipant })
       ).unwrap();
+      dispatch(readExpenses()).unwrap();
       setNewParticipant("");
       setEditingParticipant(null);
-      toast.success(`${response.name} updated successfully`);
+      toast.success(
+        `Participant name successfully updated to "${response.name}"`
+      );
     } catch (err) {
       if (err.includes("Session Expired")) {
         dispatch(logout());
         toast.error(err);
       }
+      toast.error(err)
       console.error(err);
     }
   };
@@ -174,7 +178,11 @@ export const Header: React.FC = () => {
       <h1 className="text-2xl font-bold">Split Karo</h1>
 
       <div className="flex items-center gap-3">
-        <div className="text-sm text-muted-foreground">{user?.email}</div>
+        <div className="text-sm text-muted-foreground">
+          {user?.email.length > 15
+            ? user?.email.substring(0, 15) + "..."
+            : user?.email}
+        </div>
 
         <Button
           variant="outline"
