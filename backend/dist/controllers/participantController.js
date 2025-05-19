@@ -69,6 +69,14 @@ const updateParticipant = async (req, res) => {
             res.status(400).json({ error: "Name is required" });
             return;
         }
+        const existingParticipant = await participantModel_1.ParticipantModel.findOne({
+            userId: new mongoose_1.Types.ObjectId(req.userId),
+            name: name,
+        });
+        if (existingParticipant) {
+            res.status(400).json({ error: "Participant already exists" });
+            return;
+        }
         const participant = await participantModel_1.ParticipantModel.findOneAndUpdate({ _id: new mongoose_1.Types.ObjectId(id), userId: new mongoose_1.Types.ObjectId(req.userId) }, { name, email, updatedAt: new Date() }, { new: true });
         if (!participant) {
             res.status(404).json({ error: "Participant not found" });
