@@ -144,7 +144,7 @@ export const ExpenseList: React.FC = () => {
     if (value === "" || /^\d+(\.\d{0,2})?$/.test(value)) {
       setEditForm({
         ...editForm,
-        amount: parseFloat(value),
+        amount: value ? parseFloat(value) : 0,
       });
     }
   };
@@ -212,14 +212,19 @@ export const ExpenseList: React.FC = () => {
                   <div>
                     <Label>Amount</Label>
                     <div className="relative">
-                      <span className="absolute left-3 top-3 text-muted-foreground">
-                        {currencySymbol}
-                      </span>
+                      <div className="absolute inset-y-0 left-0 flex items-center justify-center pl-3 pointer-events-none">
+                        <span className="text-muted-foreground">
+                          {currencySymbol}
+                        </span>
+                      </div>
                       <Input
+                        id="amount"
+                        type="text"
                         value={editForm.amount}
                         onChange={handleAmountChange}
                         className="pl-7"
-                        placeholder="0.00"
+                        placeholder="0"
+                        required
                       />
                     </div>
                   </div>
